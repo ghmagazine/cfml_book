@@ -4,6 +4,7 @@ from sklearn.linear_model import LogisticRegression
 
 
 def calc_online(dataset_online: dict) -> float:
+    """短期実験におけるAVG推定量を実行する."""
     r_on, w_on = dataset_online["r_t"], dataset_online["w"]
 
     estimated_value_of_pi = (w_on * r_on.mean(1)).sum() / w_on.sum()
@@ -14,6 +15,7 @@ def calc_online(dataset_online: dict) -> float:
 
 
 def calc_ips(dataset: dict, pi: np.ndarray) -> float:
+    """ログデータにおけるIPS推定量を実行する."""
     num_data, T = dataset["num_data"], dataset["T"]
     a_t, r_t, pi_0 = dataset["a_t"], dataset["r_t"], dataset["pi_0"]
 
@@ -37,7 +39,9 @@ def calc_ips(dataset: dict, pi: np.ndarray) -> float:
 
 
 def calc_new(dataset: dict, dataset_online: dict, pi: np.ndarray) -> float:
-
+    """短期実験データとログデータを用いた新推定量を実行する.
+    なおここではIPS推定量との公平な比較を行うため、回帰モデル\hat{f}の部分は省略している.
+    """
     x, r_t = dataset["x"], dataset["r_t"]
     x_on, r_on, w_on = dataset_online["x"], dataset_online["r_t"], dataset_online["w"]
     lr = LogisticRegression(C=100, random_state=12345)

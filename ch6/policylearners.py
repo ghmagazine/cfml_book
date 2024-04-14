@@ -12,6 +12,7 @@ from utils import GradientBasedPolicyDataset
 
 @dataclass
 class IPSBasedGradientPolicyLearner:
+    """勾配ベースのアプローチに基づく、メール配信経由の視聴時間を最大化するオフ方策学習."""
     dim_x: int
     num_actions: int
     hidden_layer_size: tuple = (30, 30, 30)
@@ -149,6 +150,7 @@ class IPSBasedGradientPolicyLearner:
 
 @dataclass
 class CateBasedGradientPolicyLearner:
+    """勾配ベースのアプローチに基づく、プラットフォーム全体の視聴時間を最大化するオフ方策学習."""
     dim_x: int
     num_actions: int
     hidden_layer_size: tuple = (30, 30, 30)
